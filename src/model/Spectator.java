@@ -1,6 +1,8 @@
 package model;
 
-public class Spectator extends Person{
+import java.io.Serializable;
+
+public class Spectator extends Person implements Serializable{
 
 	private Spectator left;
 	private Spectator rigth;

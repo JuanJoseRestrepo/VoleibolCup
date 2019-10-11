@@ -1,6 +1,8 @@
 package model;
 
-public class Competitor extends Person {
+import java.io.Serializable;
+
+public class Competitor extends Person implements Serializable {
 
 	private Competitor previous;
 	private Competitor next;
