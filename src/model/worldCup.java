@@ -132,7 +132,7 @@ public class worldCup implements Serializable {
 	}
 	
 	public void loadSpectator() {
-		File fl = new File("files\\clubsVoleibol.csv");
+		File fl = new File("D:\\VoleibolCup\\files\\clubsVoleibol.csv");
 		
 		try {
 		FileReader fr = new FileReader(fl);
@@ -163,7 +163,7 @@ public class worldCup implements Serializable {
 	}
 	
 	public void loadCompetitor() {
-		File fl = new File("files\\clubsVoleibol.csv");
+		File fl = new File("D:\\VoleibolCup\\files\\clubsVoleibol.csv");
 		
 		try {
 		FileReader fr = new FileReader(fl);
