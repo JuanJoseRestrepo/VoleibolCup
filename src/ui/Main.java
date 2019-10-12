@@ -8,8 +8,8 @@ public class Main {
 	private Scanner reader;
 	
 	public Main() {
-		cup = new worldCup("files\\clubsVoleibol");
 		reader = new Scanner(System.in);
+		cup = new worldCup("files\\clubsVoleibol.csv");
 	}
 	
 
@@ -23,9 +23,15 @@ public class Main {
 			inputUser = reader.nextInt();
 			reader.nextLine();
 			if(inputUser == 1) {
-				
+				Competitor e = new Competitor("b","b","b","b","b","b","b","b");
+				cup.addCompetitorOrdenate(e);
 			}else if(inputUser == 2) {
-				
+				Spectator e = new Spectator("b","a","a","a","a","a","a","a");
+				Spectator e1 = new Spectator("a","a","a","a","a","a","a","a");
+				Spectator e2 = new Spectator("c","a","a","a","a","a","a","a");
+				cup.addSpectatorCVS(e);
+				cup.addSpectatorCVS(e1);
+				cup.addSpectatorCVS(e2);
 			}else {
 				System.out.println("Hasta la proxima!!!");
 				cup.serializableABB();

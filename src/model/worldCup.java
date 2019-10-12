@@ -3,7 +3,6 @@ package model;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,7 +24,8 @@ public class worldCup implements Serializable {
 	
 	public worldCup(String archives) {
 		this.archives = archives;
-		onlyOneTime();
+		loadSpectator();
+		loadCompetitor();
 		deserializableABB();
 		deserializableCompetitor();
 	}
@@ -53,14 +53,6 @@ public class worldCup implements Serializable {
 		this.root = root;
 	}
 	
-	public void onlyOneTime() {
-		
-		if(root == null) {
-			loadCompetitor();
-			loadSpectator();
-		}
-		
-	}
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void serializableABB() {
@@ -140,7 +132,7 @@ public class worldCup implements Serializable {
 	}
 	
 	public void loadSpectator() {
-		File fl = new File(archives);
+		File fl = new File("files\\clubsVoleibol.csv");
 		
 		try {
 		FileReader fr = new FileReader(fl);
@@ -171,7 +163,7 @@ public class worldCup implements Serializable {
 	}
 	
 	public void loadCompetitor() {
-		File fl = new File(archives);
+		File fl = new File("files\\clubsVoleibol.csv");
 		
 		try {
 		FileReader fr = new FileReader(fl);
@@ -235,13 +227,13 @@ public class worldCup implements Serializable {
 			if(first.getNext() == null) {
 				first.setNext(e);
 			}else {
-				if(e.getIdPerson().compareToIgnoreCase(first.getIdPerson()) < 0) {
+				if(e.getIdPerson().compareToIgnoreCase(first.getIdPerson()) <= 0) {
 					e.setNext(first);
 					first.setPrevious(e);
 					firstCompetitor = e;
 				}else {
 					
-					while(first != null && first.getIdPerson().compareToIgnoreCase(e.getIdPerson()) < 0) {
+					while(first != null && first.getIdPerson().compareToIgnoreCase(e.getIdPerson()) <= 0) {
 						ant = first;
 						first = first.getNext();
 					}
