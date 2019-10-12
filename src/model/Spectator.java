@@ -57,17 +57,36 @@ public class Spectator extends Person implements Serializable{
 			return this;
 		}else {
 			if(idPerson.compareToIgnoreCase(idPersonita) < 0) {
-				
+					if(this.rigth != null) {
 					encon = this.rigth.searchSpectator1(idPersonita);
-				
+					}
 			}else {
-				
+					if(this.left != null) {
 					encon = this.left.searchSpectator1(idPersonita);
-				
+					}
 			}
 		}
 		return encon;
 	}
 	
+	public String searchSpectator3(String idPersonita) {
+		String msj = "";
+		
+		if(idPerson.compareToIgnoreCase(idPersonita) == 0) {
+			return this.getNameFirst();
+		}else {
+			if(idPerson.compareToIgnoreCase(idPersonita) < 0) {
+					if(this.rigth != null) {
+						msj = this.rigth.searchSpectator3(idPersonita);
+					}
+			}else {
+					if(this.left != null) {
+						msj = this.left.searchSpectator3(idPersonita);
+					}
+			}
+		}
+		
+		return msj;
+	}
 
 }

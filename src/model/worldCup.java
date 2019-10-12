@@ -126,6 +126,9 @@ public class worldCup implements Serializable {
 	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/*
 	 * 
 	 */
@@ -219,6 +222,11 @@ public class worldCup implements Serializable {
 		}
 	}
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public Spectator searchSpectator1(String idSpectator) {
 		Spectator raiz = root;
 		
@@ -226,6 +234,16 @@ public class worldCup implements Serializable {
 			return root;
 		}else {
 			return raiz.searchSpectator1(idSpectator);
+		}
+	}
+	
+	public String searchSpectator2(String idSpectator) {
+		Spectator raiz = root;
+		String msj = " ";
+		if(idSpectator.compareToIgnoreCase(raiz.getIdPerson()) == 0) {
+			return msj = root.getNameFirst();
+		}else {
+			return msj  = raiz.searchSpectator3(idSpectator);
 		}
 	}
 	
@@ -265,6 +283,31 @@ public class worldCup implements Serializable {
 				}
 			}
 		}	
+	}
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void pintarArbolito() {
+		
+		Spectator raiz = root;
+		if(raiz == null) {
+		 System.out.println("Esta vacio");
+		}else {
+			pintarArbol(raiz);
+		}
+		
+	}
+	
+	public void pintarArbol(Spectator e) {
+		if(e != null) {
+			if(e.getCountry().equalsIgnoreCase("China")) {
+			pintarArbol(e.getLeft());
+			System.out.println(e.getNameFirst());
+			pintarArbol(e.getRigth());
+			}else {
+
+			}
+		}
 	}
 	
 }

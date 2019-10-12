@@ -28,8 +28,10 @@ public class Main {
 			reader.nextLine();
 			if(inputUser == 1) {
 
+//				System.out.println(cup.searchSpectator2("1"));
+				cup.pintarArbolito();
 			}else if(inputUser == 2) {
-				Spectator e = new Spectator("b","a","a","a","a","a","a","a");
+				Spectator e = new Spectator("baaaaa","aaaaaaaaaa","aaaaaaaa","aaaaaaaaaa","aaaaaaaaa","aaaaaa","aaaaa","aaa");
 				cup.addSpectatorUser(e);
 
 			}else {
@@ -41,6 +43,7 @@ public class Main {
 			
 		}catch(notRepeatPerson e) {
 			e.getCause();
+			System.out.println("Se encontor uno repetido");
 		}catch(InputMismatchException e) {
 			System.out.println("Digite por favor un digito valido");
 			e.getCause();
