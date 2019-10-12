@@ -8,7 +8,7 @@ public class Main {
 	private Scanner reader;
 	
 	public Main() {
-		cup = new worldCup("files\\clubsVoleibol.csv");
+		cup = new worldCup("files\\clubsVoleibol");
 		reader = new Scanner(System.in);
 	}
 	

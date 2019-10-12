@@ -65,7 +65,7 @@ public class worldCup implements Serializable {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void serializableABB() {
 		
-		File fl = new File("files\\Clubs.dat");
+		File fl = new File("files\\Clubs1.dat");
 		
 		try {
 			FileOutputStream flo = new FileOutputStream(fl);
@@ -98,7 +98,7 @@ public class worldCup implements Serializable {
 	}
 	
 	public void deserializableABB() {
-		File fl = new File("files\\Clubs.dat");
+		File fl = new File("files\\Clubs1.dat");
 		try {
 		FileInputStream fis = new FileInputStream(fl);
 		ObjectInputStream ois = new ObjectInputStream(fis);
