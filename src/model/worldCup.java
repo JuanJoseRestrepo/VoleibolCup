@@ -10,6 +10,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import exceptions.notFoundCompetitor;
+import exceptions.notFoundPersonError;
 import exceptions.notRepeatPerson;
 
 public class worldCup implements Serializable {
@@ -237,11 +239,11 @@ public class worldCup implements Serializable {
 		}
 	}
 	
-	public String searchSpectator2(String idSpectator) {
+	public String searchSpectator2(String idSpectator) throws notFoundPersonError {
 		Spectator raiz = root;
-		String msj = " ";
+		String msj = "";
 		if(idSpectator.compareToIgnoreCase(raiz.getIdPerson()) == 0) {
-			return msj = root.getNameFirst();
+			return msj = root.toString();
 		}else {
 			return msj  = raiz.searchSpectator3(idSpectator);
 		}
@@ -285,6 +287,47 @@ public class worldCup implements Serializable {
 		}	
 	}
 	
+	public String searchCompetitors(String idPerson) throws notFoundCompetitor {
+		String msj = "";
+		Competitor first = firstCompetitor;
+		boolean t = false;
+		while(first != null && !t) {
+			if(first.getIdPerson().compareToIgnoreCase(idPerson) == 0) {
+				msj = first.toString();
+				t = true;
+			}else {
+				first = first.getNext();
+			}
+		}
+		
+		if(t == false) {
+			throw new notFoundCompetitor("No se encontro");
+		}
+		
+		return msj;
+		
+	}
+	
+	public String paintCountry(String country) {
+		String msj = "";
+		Competitor first = firstCompetitor;
+		boolean t = false;
+		while(first != null && !t) {
+			if(first.getIdPerson().compareToIgnoreCase("China") == 0) {
+				msj += "C" + "--->" + first.toString();
+			}else {
+				first = first.getNext();
+				if(first.getNext() == null) {
+					t = true;
+				}
+			}
+	
+		}
+		
+		
+		
+		return msj;
+	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public void pintarArbolito() {
@@ -300,14 +343,15 @@ public class worldCup implements Serializable {
 	
 	public void pintarArbol(Spectator e) {
 		if(e != null) {
-			if(e.getCountry().equalsIgnoreCase("China")) {
 			pintarArbol(e.getLeft());
+			if(e.getCountry().equalsIgnoreCase("China")) {
 			System.out.println(e.getNameFirst());
+			}
 			pintarArbol(e.getRigth());
-			}else {
-
+			if(e.getCountry().equalsIgnoreCase("China")) {
+			System.out.println(e.getNameFirst());
+			}
 			}
 		}
-	}
 	
 }

@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.SecondaryLoop;
 import java.io.Serializable;
 
 public class Person implements Serializable {
@@ -94,7 +95,19 @@ public class Person implements Serializable {
 		this.birthDay = birthDay;
 	}
 	
-	
+	public String toString() {
+		String msj = " ";
+		
+		msj += "El id del person es:" + idPerson + "\n";
+		msj += "El primer nombre es:" + nameFirst +"\n";
+		msj += "El segundo nombre es:" + nameLast +"\n";
+		msj += "El email es:" + email +"\n";
+		msj += "El genero es:" + gender +"\n";
+		msj += "El pais es:" + country +"\n";
+		msj += "El cumpleaños es:" + birthDay +"\n";
+		
+		return msj;
+	}
 	
 	
 }

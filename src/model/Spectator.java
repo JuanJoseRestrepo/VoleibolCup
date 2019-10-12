@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 
+import exceptions.notFoundPersonError;
+
 public class Spectator extends Person implements Serializable{
 
 	/**
@@ -69,23 +71,21 @@ public class Spectator extends Person implements Serializable{
 		return encon;
 	}
 	
-	public String searchSpectator3(String idPersonita) {
+	public String searchSpectator3(String idPersonita) throws notFoundPersonError {
 		String msj = "";
 		
 		if(idPerson.compareToIgnoreCase(idPersonita) == 0) {
-			return this.getNameFirst();
-		}else {
-			if(idPerson.compareToIgnoreCase(idPersonita) < 0) {
+			return this.toString();
+		}else  if(idPerson.compareToIgnoreCase(idPersonita) < 0) {
 					if(this.rigth != null) {
 						msj = this.rigth.searchSpectator3(idPersonita);
 					}
-			}else {
+			}else if(idPerson.compareToIgnoreCase(idPersonita) > 0) {
 					if(this.left != null) {
 						msj = this.left.searchSpectator3(idPersonita);
 					}
 			}
-		}
-		
+	
 		return msj;
 	}
 
