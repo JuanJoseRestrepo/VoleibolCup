@@ -24,8 +24,7 @@ public class worldCup implements Serializable {
 	
 	public worldCup(String archives) {
 		this.archives = archives;
-		loadSpectator();
-		loadCompetitor();
+		verifyNotReCharger();
 		deserializableABB();
 		deserializableCompetitor();
 	}
@@ -53,6 +52,15 @@ public class worldCup implements Serializable {
 		this.root = root;
 	}
 	
+	public void verifyNotReCharger() {
+		File fl = new File("files\\Clubs1.dat");
+		File fl1 = new File("files\\Clubs.dat");
+		if(!fl.exists() && !fl1.exists()) {
+			loadCompetitor();
+			loadSpectator();
+		}
+		
+	}
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void serializableABB() {
@@ -132,7 +140,7 @@ public class worldCup implements Serializable {
 	}
 	
 	public void loadSpectator() {
-		File fl = new File("D:\\VoleibolCup\\files\\clubsVoleibol.csv");
+		File fl = new File(archives);
 		
 		try {
 		FileReader fr = new FileReader(fl);
@@ -140,6 +148,7 @@ public class worldCup implements Serializable {
 		String msj = br.readLine();
 		
 		while(msj != null) {
+			System.out.println(msj);
 			String[] b = msj.split(",");
 			String idPersonita = b[0];
 			String nameFirstsito = b[1];
@@ -155,6 +164,7 @@ public class worldCup implements Serializable {
 			msj = br.readLine();
 			
 		}
+		System.out.println("---------");
 		br.close();
 		fr.close();
 		}catch(IOException e) {
@@ -163,7 +173,7 @@ public class worldCup implements Serializable {
 	}
 	
 	public void loadCompetitor() {
-		File fl = new File("D:\\VoleibolCup\\files\\clubsVoleibol.csv");
+		File fl = new File(archives);
 		
 		try {
 		FileReader fr = new FileReader(fl);
@@ -171,6 +181,7 @@ public class worldCup implements Serializable {
 		String msj = br.readLine();
 		
 		while(msj != null) {
+			System.out.println(msj);
 			String[] b = msj.split(",");
 			String idPersonita = b[0];
 			String nameFirstsito = b[1];

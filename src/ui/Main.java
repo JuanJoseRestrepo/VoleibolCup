@@ -9,7 +9,7 @@ public class Main {
 	
 	public Main() {
 		reader = new Scanner(System.in);
-		cup = new worldCup("files\\clubsVoleibol.csv");
+		cup = new worldCup("files\\clubsVoleibol.csv.csv");
 	}
 	
 
