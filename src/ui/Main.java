@@ -87,7 +87,8 @@ public class Main {
 			String country = reader.nextLine();	
 				
 			System.out.println(cup.paintCountry(country));
-				
+			reader.hasNextLine();
+			
 			}else{
 				System.out.println("Hasta la proxima!!!");
 				cup.serializableABB();

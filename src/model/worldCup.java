@@ -313,13 +313,13 @@ public class worldCup implements Serializable {
 		Competitor first = firstCompetitor;
 		boolean t = false;
 		while(first != null && !t) {
-			if(first.getIdPerson().compareToIgnoreCase("China") == 0) {
+			if(first.getCountry().compareToIgnoreCase("China") == 0) {
 				msj += "C" + "--->" + first.toString();
-			}else {
+			}
 				first = first.getNext();
 				if(first.getNext() == null) {
 					t = true;
-				}
+				
 			}
 	
 		}
