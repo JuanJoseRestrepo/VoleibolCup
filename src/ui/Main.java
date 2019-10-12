@@ -24,7 +24,9 @@ public class Main {
 			reader.nextLine();
 			if(inputUser == 1) {
 				Competitor e = new Competitor("b","b","b","b","b","b","b","b");
+				Competitor e1 = new Competitor("c","b","b","b","b","b","b","b");
 				cup.addCompetitorOrdenate(e);
+				cup.addCompetitorOrdenate(e1);
 			}else if(inputUser == 2) {
 				Spectator e = new Spectator("b","a","a","a","a","a","a","a");
 				Spectator e1 = new Spectator("a","a","a","a","a","a","a","a");
