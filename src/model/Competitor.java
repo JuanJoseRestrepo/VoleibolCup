@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class Competitor extends Person implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Competitor previous;
 	private Competitor next;
 

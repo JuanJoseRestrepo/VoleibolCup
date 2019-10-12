@@ -11,6 +11,10 @@ import exceptions.notRepeatPerson;
 
 public class worldCup implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String countryCup;
 	private String archives;
 	private Competitor firstCompetitor;

@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class Spectator extends Person implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Spectator left;
 	private Spectator rigth;
 	
