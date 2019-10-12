@@ -8,7 +8,7 @@ public class Main {
 	private Scanner reader;
 	
 	public Main() {
-		cup = new worldCup("Peru Copa","files\\clubsVoleibol.csv");
+		cup = new worldCup("files\\clubsVoleibol.csv");
 		reader = new Scanner(System.in);
 	}
 	
@@ -18,6 +18,21 @@ public class Main {
 		
 		System.out.println("/////////////");
 		System.out.println("////////////");
+		
+		while(inputUser != 3) {
+			inputUser = reader.nextInt();
+			reader.nextLine();
+			if(inputUser == 1) {
+				
+			}else if(inputUser == 2) {
+				
+			}else {
+				System.out.println("Hasta la proxima!!!");
+				cup.serializableABB();
+				cup.serializableCompetitor();
+			}
+		}
+		
 	}
 	public static void main(String[] args) {
 		Main m = new Main();

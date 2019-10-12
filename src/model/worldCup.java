@@ -2,9 +2,13 @@ package model;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import exceptions.notRepeatPerson;
@@ -15,23 +19,17 @@ public class worldCup implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String countryCup;
 	private String archives;
 	private Competitor firstCompetitor;
 	private Spectator root;
 	
-	public worldCup(String countryCup, String archives) {
-		super();
-		this.countryCup = countryCup;
+	public worldCup(String archives) {
 		this.archives = archives;
+		onlyOneTime();
+		deserializableABB();
+		deserializableCompetitor();
 	}
 	
-	public String getCountryCup() {
-		return countryCup;
-	}
-	public void setCountryCup(String countryCup) {
-		this.countryCup = countryCup;
-	}
 	public String getArchives() {
 		return archives;
 	}
@@ -39,6 +37,95 @@ public class worldCup implements Serializable {
 		this.archives = archives;
 	}
 	
+	public Competitor getFirstCompetitor() {
+		return firstCompetitor;
+	}
+
+	public void setFirstCompetitor(Competitor firstCompetitor) {
+		this.firstCompetitor = firstCompetitor;
+	}
+
+	public Spectator getRoot() {
+		return root;
+	}
+
+	public void setRoot(Spectator root) {
+		this.root = root;
+	}
+	
+	public void onlyOneTime() {
+		
+		if(root == null) {
+			loadCompetitor();
+			loadSpectator();
+		}
+		
+	}
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	public void serializableABB() {
+		
+		File fl = new File("files\\Clubs.dat");
+		
+		try {
+			FileOutputStream flo = new FileOutputStream(fl);
+			ObjectOutputStream ob = new ObjectOutputStream(flo);
+			
+			ob.writeObject((getRoot()));
+			ob.close();
+			
+		}catch(IOException e) {
+			e.getCause();
+		}
+		
+	}
+	
+	public void serializableCompetitor() {
+		
+		File fl = new File("files\\Clubs.dat");
+		
+		try {
+			FileOutputStream flo = new FileOutputStream(fl);
+			ObjectOutputStream ob = new ObjectOutputStream(flo);
+			
+			ob.writeObject((getFirstCompetitor()));
+			ob.close();
+			
+		}catch(IOException e) {
+			e.getCause();
+		}
+		
+	}
+	
+	public void deserializableABB() {
+		File fl = new File("files\\Clubs.dat");
+		try {
+		FileInputStream fis = new FileInputStream(fl);
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		setRoot((Spectator) ois.readObject());
+		ois.close();
+		}catch(ClassNotFoundException e) {
+			e.getCause();
+		}catch(IOException e) {
+			e.getCause();
+		}
+	}
+	
+	public void deserializableCompetitor() {
+		File fl = new File("files\\Clubs.dat");
+		try {
+		FileInputStream fis = new FileInputStream(fl);
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		setFirstCompetitor((Competitor) ois.readObject());
+		ois.close();
+		}catch(ClassNotFoundException e) {
+			e.getCause();
+		}catch(IOException e) {
+			e.getCause();
+		}
+	}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/*
 	 * 
 	 */

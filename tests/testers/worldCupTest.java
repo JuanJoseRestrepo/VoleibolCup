@@ -11,7 +11,7 @@ class worldCupTest {
 	private worldCup cups;
 		
 	private void setupEscenario() {
-		cups = new worldCup("","");
+		cups = new worldCup("");
 		
 	}
 	@Test
