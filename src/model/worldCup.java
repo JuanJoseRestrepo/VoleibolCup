@@ -211,21 +211,21 @@ public class worldCup implements Serializable {
 		if(root == null) {
 			root = e;
 		}else {
-			if(searchSpectator1(e.getIdPerson()) == true) {
-				throw new notRepeatPerson("");
+			if(searchSpectator1(e.getIdPerson()) != null) {
+				throw new notRepeatPerson("No se puede repetir");
 			}else {
 				raiz1.insertSpectator(e);
 			}	
 		}
 	}
 
-	public boolean searchSpectator1(String idSpectator) {
+	public Spectator searchSpectator1(String idSpectator) {
 		Spectator raiz = root;
-		boolean t;
+		
 		if(idSpectator.compareToIgnoreCase(raiz.getIdPerson()) == 0) {
-			return t = true;
+			return root;
 		}else {
-			return t = raiz.searchSpectator1(idSpectator);
+			return raiz.searchSpectator1(idSpectator);
 		}
 	}
 	

@@ -50,22 +50,23 @@ public class Spectator extends Person implements Serializable{
 		}
 	}
 	
-	public boolean searchSpectator1(String idPersonita) {
-		boolean t = false;
+	
+	public Spectator searchSpectator1(String idPersonita) {
+		Spectator encon = null;
 		if(idPerson.compareToIgnoreCase(idPersonita) == 0) {
-			return t = true;
+			return this;
 		}else {
 			if(idPerson.compareToIgnoreCase(idPersonita) < 0) {
-				if(this.rigth != null) {
-					this.rigth.searchSpectator1(idPersonita);
-				}
+				
+					encon = this.rigth.searchSpectator1(idPersonita);
+				
 			}else {
-				if(this.left != null) {
-					this.left.searchSpectator1(idPersonita);
-				}
+				
+					encon = this.left.searchSpectator1(idPersonita);
+				
 			}
 		}
-		return t;
+		return encon;
 	}
 	
 
