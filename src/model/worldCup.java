@@ -58,12 +58,60 @@ public class worldCup implements Serializable {
 		File fl = new File("files\\Clubs1.dat");
 		File fl1 = new File("files\\Clubs.dat");
 		if(!fl.exists() && !fl1.exists()) {
-			loadCompetitor();
-			loadSpectator();
+			loadSpectatorAndSpectator();
 		}
 		
 	}
 	
+	public int longitud() {
+		int resul = 0;
+		Competitor m = firstCompetitor;
+		
+		while(m != null) {
+			resul++;
+			m = m.getNext();
+		}
+		
+		return resul;
+		
+	}
+	
+	public Competitor indiceElement(int posicion) {
+		Competitor samu = firstCompetitor;
+		
+		if(posicion != 0) {
+			for(int i = 0; i < posicion;i++) {
+				
+				samu = samu.getNext();
+				
+			}
+		}else {
+			
+			samu = firstCompetitor;
+			
+		}
+		
+		return samu;
+	}
+	
+	public String buscarRecursivamente(String idPerson) {
+		String msj = "";
+		
+		return  msj = recorridoRecursivo(idPerson, getFirstCompetitor());
+		
+	}
+	
+    public String recorridoRecursivo (String idPerson,Competitor e) {
+    	String msj = "";
+    	if(e == null) {
+    		return msj = "No se encontro";
+    	}
+    	if(e.getIdPerson().compareToIgnoreCase(idPerson) == 0) {
+    	return msj = e.toString();	
+    	}else {
+    	return msj = recorridoRecursivo(idPerson, e.getNext());
+    	}
+ }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void serializableABB() {
 		
@@ -144,16 +192,16 @@ public class worldCup implements Serializable {
 		}	
 	}
 	
-	public void loadSpectator() {
+	public void loadSpectatorAndSpectator() {
 		File fl = new File(archives);
 		
 		try {
 		FileReader fr = new FileReader(fl);
 		BufferedReader br = new BufferedReader(fr);
 		String msj = br.readLine();
-		
+		int i = 0;
 		while(msj != null) {
-			System.out.println(msj);
+			if(i % 2 == 0) {
 			String[] b = msj.split(",");
 			String idPersonita = b[0];
 			String nameFirstsito = b[1];
@@ -167,7 +215,23 @@ public class worldCup implements Serializable {
 			Spectator e = new Spectator(idPersonita,nameFirstsito,nameSecondito,email,gender,country,photo,birthDay);
 			addSpectatorCVS(e);
 			msj = br.readLine();
-			
+			}else if(i % 2 != 0){
+				
+				String[] b = msj.split(",");
+				String idPersonita = b[0];
+				String nameFirstsito = b[1];
+				String nameSecondito = b[2];
+				String email = b[3];
+				String gender = b[4];
+				String country = b[5];
+				String photo = b[6];
+				String birthDay = b[7];
+				
+				Competitor e = new Competitor(idPersonita,nameFirstsito,nameSecondito,email,gender,country,photo,birthDay);
+				addCompetitorOrdenate(e);
+				msj = br.readLine();
+			}
+			i++;
 		}
 		System.out.println("---------");
 		br.close();
@@ -176,38 +240,7 @@ public class worldCup implements Serializable {
 			e.getCause();
 		}
 	}
-	
-	public void loadCompetitor() {
-		File fl = new File(archives);
-		
-		try {
-		FileReader fr = new FileReader(fl);
-		BufferedReader br = new BufferedReader(fr);
-		String msj = br.readLine();
-		
-		while(msj != null) {
-			System.out.println(msj);
-			String[] b = msj.split(",");
-			String idPersonita = b[0];
-			String nameFirstsito = b[1];
-			String nameSecondito = b[2];
-			String email = b[3];
-			String gender = b[4];
-			String country = b[5];
-			String photo = b[6];
-			String birthDay = b[7];
-			
-			Competitor e = new Competitor(idPersonita,nameFirstsito,nameSecondito,email,gender,country,photo,birthDay);
-			addCompetitorOrdenate(e);
-			msj = br.readLine();
-			msj = br.readLine();
-		}
-		br.close();
-		fr.close();
-		}catch(IOException e) {
-			e.getCause();
-		}
-	}
+
 	
 	public void addSpectatorUser(Spectator e) throws notRepeatPerson {
 		
@@ -314,7 +347,7 @@ public class worldCup implements Serializable {
 		boolean t = false;
 		while(first != null && !t) {
 			if(first.getCountry().compareToIgnoreCase("China") == 0) {
-				msj += "C" + "--->" + first.toString();
+				msj += first.toString() + "--->";
 			}
 				first = first.getNext();
 				if(first.getNext() == null) {
@@ -329,29 +362,24 @@ public class worldCup implements Serializable {
 		return msj;
 	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public void pintarArbol(Spectator e,int pos,String country) {
 
-	public void pintarArbolito() {
-		
-		Spectator raiz = root;
-		if(raiz == null) {
-		 System.out.println("Esta vacio");
-		}else {
-			pintarArbol(raiz);
-		}
-		
+		if(e == null) 
+			return;
+		pintarArbol(e.getRigth(),pos + 1,country);
+		if(e.getCountry().compareToIgnoreCase(country) == 0) {
+			if(pos != 0) {
+				int i = 0;
+				while(i < pos-1) {
+				System.out.print("|\t");
+				i++;
+			}	
+			System.out.println("|------" + e.getIdPerson());
+		    }else {
+		    	System.out.println("|-" +e.getIdPerson());;
+		    }
+		pintarArbol(e.getLeft(), pos + 1,country);	
 	}
-	
-	public void pintarArbol(Spectator e) {
-		if(e != null) {
-			pintarArbol(e.getLeft());
-			if(e.getCountry().equalsIgnoreCase("China")) {
-			System.out.println(e.getNameFirst());
-			}
-			pintarArbol(e.getRigth());
-			if(e.getCountry().equalsIgnoreCase("China")) {
-			System.out.println(e.getNameFirst());
-			}
-			}
-		}
-	
+  }
 }

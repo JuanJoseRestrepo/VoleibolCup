@@ -24,7 +24,7 @@ public class Main {
 		System.out.println("1.Buscar a los espectadores por id");
 		System.out.println("/////////////");
 		
-		while(inputUser != 5) {
+		while(inputUser != 6) {
 			
 			try {
 			inputUser = reader.nextInt();
@@ -48,7 +48,7 @@ public class Main {
 				String id1 = reader.nextLine();
 				
 				long b1 = System.nanoTime();
-				System.out.println(cup.searchCompetitors(id1));
+				System.out.println(cup.buscarRecursivamente(id1));
 				long b2 = System.nanoTime();
 				
 				System.out.println("El tiempo es:" + (b2-b1));
@@ -83,12 +83,13 @@ public class Main {
 				cup.addSpectatorUser(e);
 				
 			}else if(inputUser == 4) {
-			System.out.println("Por favor digite el pais");
-			String country = reader.nextLine();	
-				
-			System.out.println(cup.paintCountry(country));
-			reader.hasNextLine();
 			
+			}else if(inputUser == 5) {
+				System.out.println("Digite el pais que necesita");
+				String msj = reader.nextLine();
+				
+				cup.pintarArbol(cup.getRoot(),0,msj);
+				
 			}else{
 				System.out.println("Hasta la proxima!!!");
 				cup.serializableABB();
@@ -105,10 +106,11 @@ public class Main {
 		} catch (notFoundPersonError e) {
 			System.out.println("No se encontro");
 			e.getCause();
-		} catch (notFoundCompetitor e) {
-			System.out.println("No se encontro al competidor");
-			e.getCause();
 		}
+//		} catch (notFoundCompetitor e) {
+//			System.out.println("No se encontro al competidor");
+//			e.getCause();
+//		}
 			
 	}
 }
