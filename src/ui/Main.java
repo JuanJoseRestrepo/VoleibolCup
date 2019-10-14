@@ -20,9 +20,14 @@ public class Main {
 	public void showMenu() {
 		int inputUser = 0;
 		
-		System.out.println("/////////////");
+		System.out.println("///////////////////////////////////////////////////////////////////////////");
 		System.out.println("1.Buscar a los espectadores por id");
-		System.out.println("/////////////");
+		System.out.println("2.Buscar a los competidores por id");
+		System.out.println("3.Añadir espectador al arbol (Opcional)");
+		System.out.println("4.Mostrar paises de los competidores(Lista)");
+		System.out.println("5.Mostrar paises de los espectadores(Arbol)");
+		System.out.println("6.Salir");
+		System.out.println("///////////////////////////////////////////////////////////////////////////");
 		
 		while(inputUser != 6) {
 			
@@ -48,7 +53,7 @@ public class Main {
 				String id1 = reader.nextLine();
 				
 				long b1 = System.nanoTime();
-				System.out.println(cup.buscarRecursivamente(id1));
+				System.out.println(cup.searchCompetitors(id1));
 				long b2 = System.nanoTime();
 				
 				System.out.println("El tiempo es:" + (b2-b1));
@@ -83,7 +88,10 @@ public class Main {
 				cup.addSpectatorUser(e);
 				
 			}else if(inputUser == 4) {
-			
+				System.out.println("Digite el pais que necesita");
+				String msj = reader.nextLine();
+				
+				System.out.println(cup.paintCountry(msj));
 			}else if(inputUser == 5) {
 				System.out.println("Digite el pais que necesita");
 				String msj = reader.nextLine();
@@ -92,8 +100,7 @@ public class Main {
 				
 			}else{
 				System.out.println("Hasta la proxima!!!");
-				cup.serializableABB();
-				cup.serializableCompetitor();
+				System.out.println(cup.showInfo());
 			}
 			
 			
@@ -106,11 +113,10 @@ public class Main {
 		} catch (notFoundPersonError e) {
 			System.out.println("No se encontro");
 			e.getCause();
+		} catch (notFoundCompetitor e) {
+			System.out.println("No se encontro al competidor");
+			e.getCause();
 		}
-//		} catch (notFoundCompetitor e) {
-//			System.out.println("No se encontro al competidor");
-//			e.getCause();
-//		}
 			
 	}
 }

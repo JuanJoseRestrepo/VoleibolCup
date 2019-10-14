@@ -27,8 +27,6 @@ public class worldCup implements Serializable {
 	public worldCup(String archives) {
 		this.archives = archives;
 		verifyNotReCharger();
-		deserializableABB();
-		deserializableCompetitor();
 	}
 	
 	public String getArchives() {
@@ -93,16 +91,13 @@ public class worldCup implements Serializable {
 		
 		return samu;
 	}
-	
-	public String buscarRecursivamente(String idPerson) {
-		String msj = "";
-		
-		return  msj = recorridoRecursivo(idPerson, getFirstCompetitor());
-		
-	}
+
 	
     public String recorridoRecursivo (String idPerson,Competitor e) {
     	String msj = "";
+    	if(firstCompetitor == null) {
+    		return msj = "No se encontro";
+    	}
     	if(e == null) {
     		return msj = "No se encontro";
     	}
@@ -113,67 +108,6 @@ public class worldCup implements Serializable {
     	}
  }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void serializableABB() {
-		
-		File fl = new File("files\\Clubs1.dat");
-		
-		try {
-			FileOutputStream flo = new FileOutputStream(fl);
-			ObjectOutputStream ob = new ObjectOutputStream(flo);
-			
-			ob.writeObject((getRoot()));
-			ob.close();
-			
-		}catch(IOException e) {
-			e.getCause();
-		}
-		
-	}
-	
-	public void serializableCompetitor() {
-		
-		File fl = new File("files\\Clubs.dat");
-		
-		try {
-			FileOutputStream flo = new FileOutputStream(fl);
-			ObjectOutputStream ob = new ObjectOutputStream(flo);
-			
-			ob.writeObject((getFirstCompetitor()));
-			ob.close();
-			
-		}catch(IOException e) {
-			e.getCause();
-		}
-		
-	}
-	
-	public void deserializableABB() {
-		File fl = new File("files\\Clubs1.dat");
-		try {
-		FileInputStream fis = new FileInputStream(fl);
-		ObjectInputStream ois = new ObjectInputStream(fis);
-		setRoot((Spectator) ois.readObject());
-		ois.close();
-		}catch(ClassNotFoundException e) {
-			e.getCause();
-		}catch(IOException e) {
-			e.getCause();
-		}
-	}
-	
-	public void deserializableCompetitor() {
-		File fl = new File("files\\Clubs.dat");
-		try {
-		FileInputStream fis = new FileInputStream(fl);
-		ObjectInputStream ois = new ObjectInputStream(fis);
-		setFirstCompetitor((Competitor) ois.readObject());
-		ois.close();
-		}catch(ClassNotFoundException e) {
-			e.getCause();
-		}catch(IOException e) {
-			e.getCause();
-		}
-	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	
@@ -233,7 +167,6 @@ public class worldCup implements Serializable {
 			}
 			i++;
 		}
-		System.out.println("---------");
 		br.close();
 		fr.close();
 		}catch(IOException e) {
@@ -262,6 +195,17 @@ public class worldCup implements Serializable {
 	
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	public String searchCompetitor(String idCompetitor) {
+		Competitor primer = firstCompetitor;
+		String msj = "";
+		if(idCompetitor.compareToIgnoreCase(primer.getIdPerson()) == 0) {
+			return msj = firstCompetitor.toString();
+		}else {
+			return msj = primer.searchCompetitor(idCompetitor);
+		}
+		
+	}
+	
 	public Spectator searchSpectator1(String idSpectator) {
 		Spectator raiz = root;
 		
@@ -282,22 +226,32 @@ public class worldCup implements Serializable {
 		}
 	}
 	
+	public String showInfo() {
+		String msj = "";
+		Competitor p = firstCompetitor;
+		
+		while(p !=null) {
+			msj += p.getIdPerson() + "\n";
+			p = p.getNext();
+		}
+		
+		
+		return msj;
+	}
+	
 	public void addCompetitorOrdenate(Competitor e) {
 		Competitor first = firstCompetitor;
 		Competitor ant = null;
 		if(firstCompetitor == null) {
 			firstCompetitor = e;
 		}else {
-			if(first.getNext() == null) {
-				first.setNext(e);
-			}else {
-				if(e.getIdPerson().compareToIgnoreCase(first.getIdPerson()) <= 0) {
+				if(e.getIdPerson().compareToIgnoreCase(first.getIdPerson()) < 0) {
 					e.setNext(first);
 					first.setPrevious(e);
 					firstCompetitor = e;
 				}else {
 					
-					while(first != null && first.getIdPerson().compareToIgnoreCase(e.getIdPerson()) <= 0) {
+					while(first != null && first.getIdPerson().compareToIgnoreCase(e.getIdPerson()) < 0) {
 						ant = first;
 						first = first.getNext();
 					}
@@ -318,7 +272,7 @@ public class worldCup implements Serializable {
 				}
 			}
 		}	
-	}
+	
 	
 	public String searchCompetitors(String idPerson) throws notFoundCompetitor {
 		String msj = "";
@@ -346,19 +300,15 @@ public class worldCup implements Serializable {
 		Competitor first = firstCompetitor;
 		boolean t = false;
 		while(first != null && !t) {
-			if(first.getCountry().compareToIgnoreCase("China") == 0) {
-				msj += first.toString() + "--->";
+			if(first.getCountry().compareToIgnoreCase(country) == 0) {
+				msj += "--->" + first.getIdPerson();
 			}
 				first = first.getNext();
 				if(first.getNext() == null) {
 					t = true;
-				
 			}
 	
 		}
-		
-		
-		
 		return msj;
 	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -375,11 +325,12 @@ public class worldCup implements Serializable {
 				System.out.print("|\t");
 				i++;
 			}	
-			System.out.println("|------" + e.getIdPerson());
+			System.out.println("|------>" + e.getIdPerson());
 		    }else {
-		    	System.out.println("|-" +e.getIdPerson());;
+		    	System.out.println("|--->" +e.getIdPerson());;
 		    }
 		pintarArbol(e.getLeft(), pos + 1,country);	
 	}
   }
+	
 }

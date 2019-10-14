@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 
+import exceptions.notFoundPersonError;
+
 public class Competitor extends Person implements Serializable {
 
 	/**
@@ -31,8 +33,17 @@ public class Competitor extends Person implements Serializable {
 	public void setNext(Competitor next) {
 		this.next = next;
 	}
-
 	
-	
-	
+	public String searchCompetitor(String idPersonita) {
+		String msj = "";
+		
+		if(idPerson.compareToIgnoreCase(idPersonita) == 0) {
+			return msj = this.toString();
+		}else{
+			if(this.next != null) {
+			msj = this.next.searchCompetitor(idPersonita);
+		}
+		}
+		return msj;
+	}
 }
