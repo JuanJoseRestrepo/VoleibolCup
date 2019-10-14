@@ -100,7 +100,6 @@ public class Main {
 				
 			}else{
 				System.out.println("Hasta la proxima!!!");
-				System.out.println(cup.showInfo());
 			}
 			
 			

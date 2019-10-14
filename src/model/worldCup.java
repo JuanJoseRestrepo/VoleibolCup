@@ -317,8 +317,9 @@ public class worldCup implements Serializable {
 
 		if(e == null) 
 			return;
-		pintarArbol(e.getRigth(),pos + 1,country);
 		if(e.getCountry().compareToIgnoreCase(country) == 0) {
+		pintarArbol(e.getRigth(),pos + 1,country);
+		}
 			if(pos != 0) {
 				int i = 0;
 				while(i < pos-1) {
@@ -329,8 +330,9 @@ public class worldCup implements Serializable {
 		    }else {
 		    	System.out.println("|--->" +e.getIdPerson());;
 		    }
+		if(e.getCountry().compareToIgnoreCase(country) == 0) {	
 		pintarArbol(e.getLeft(), pos + 1,country);	
+		}
 	}
   }
 	
-}
