@@ -199,7 +199,7 @@ public class worldCup implements Serializable {
 		Competitor primer = firstCompetitor;
 		String msj = "";
 		if(idCompetitor.compareToIgnoreCase(primer.getIdPerson()) == 0) {
-			return msj = firstCompetitor.toString();
+			return msj = firstCompetitor.getIdPerson();
 		}else {
 			return msj = primer.searchCompetitor(idCompetitor);
 		}

@@ -38,7 +38,7 @@ public class Competitor extends Person implements Serializable {
 		String msj = "";
 		
 		if(idPerson.compareToIgnoreCase(idPersonita) == 0) {
-			return msj = this.toString();
+			return msj = this.getIdPerson();
 		}else{
 			if(this.next != null) {
 			msj = this.next.searchCompetitor(idPersonita);
