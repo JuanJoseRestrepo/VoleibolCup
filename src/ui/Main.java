@@ -2,6 +2,7 @@ package ui;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import exceptions.errorNotRank;
 import exceptions.notFoundCompetitor;
 import exceptions.notFoundPersonError;
 import exceptions.notRepeatPerson;
@@ -34,6 +35,10 @@ public class Main {
 			try {
 			inputUser = reader.nextInt();
 			reader.nextLine();
+			
+			if(inputUser <= 0 || inputUser >= 7) {
+			throw new errorNotRank("");
+			}
 			if(inputUser == 1) {
 				System.out.println("Por favor digite el id de la persona");
 				String msj = reader.nextLine();
@@ -114,6 +119,9 @@ public class Main {
 			e.getCause();
 		} catch (notFoundCompetitor e) {
 			System.out.println("No se encontro al competidor");
+			e.getCause();
+		} catch (errorNotRank e) {
+			System.out.println("Digite un rango valido");
 			e.getCause();
 		}
 			
