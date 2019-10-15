@@ -317,22 +317,20 @@ public class worldCup implements Serializable {
 
 		if(e == null) 
 			return;
-		if(e.getCountry().compareToIgnoreCase(country) == 0) {
 		pintarArbol(e.getRigth(),pos + 1,country);
-		}
+		pintarArbol(e.getLeft(), pos + 1,country);
+		if(e.getCountry().compareToIgnoreCase(country) == 0) {
 			if(pos != 0) {
 				int i = 0;
 				while(i < pos-1) {
 				System.out.print("|\t");
 				i++;
-			}	
-			System.out.println("|------>" + e.getIdPerson());
+			}
+			System.out.println("|------" + e.getIdPerson());
 		    }else {
-		    	System.out.println("|--->" +e.getIdPerson());;
-		    }
-		if(e.getCountry().compareToIgnoreCase(country) == 0) {	
-		pintarArbol(e.getLeft(), pos + 1,country);	
-		}
+		    	System.out.println("|-" +e.getIdPerson());;
+				
+		    }	
 	}
-  }
-	
+	}
+}
